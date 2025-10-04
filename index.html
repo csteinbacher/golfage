@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>The Wolf</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="container">
+    <h1>The Wolf</h1>
+  </header>
+
+  <!-- SETUP -->
+  <section id="setup" class="container card">
+    <h2>Players (3–5)</h2>
+    <div id="playersWrap"></div>
+
+    <div class="row gap mt">
+      <button id="addPlayerBtn" type="button">+ Add Player</button>
+      <button id="removePlayerBtn" type="button">– Remove Last</button>
+    </div>
+
+    <div class="row gap mt">
+      <button id="startBtn" class="primary">Start</button>
+      <button id="clearBtn" type="button" class="danger">Clear</button>
+    </div>
+    <!-- <p class="muted mt-small">Manual points. Change rules on the fly.</p> -->
+  </section>
+
+  <!-- BOARD -->
+  <section id="board" class="container card hidden">
+    <div class="row between mobile-stack">
+      <div class="row gap wrap">
+        <!-- (Score title removed) -->
+        <div class="row gap hole-controls">
+          <span class="pill">Current Hole – <span id="holeNum">1</span></span>
+          <button id="prevHoleBtn" type="button" class="small">◀ Prev</button>
+          <button id="nextHoleBtn" type="button" class="small">Next ▶</button>
+        </div>
+      </div>
+      <!-- New Game button moved out; no button here -->
+    </div>
+
+    <ul id="scoreList" class="list"></ul>
+  </section>
+
+  <!-- Floating New Game button (bottom-right) -->
+  <button id="newGameBtn" type="button" class="fab danger">New Game</button>
+
+  <footer class="container center muted sticky-footer">
+    <div class="row center gap">
+      <button id="themeToggle" class="linklike footer-toggle" type="button" aria-label="Toggle theme">
+        Light / Dark
+      </button>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
