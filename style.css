@@ -18,9 +18,10 @@
   --minus-border: #fecaca; /* red-200 */
   --plus-bg: #e0f2fe;      /* sky-100 */
   --plus-border: #bae6fd;  /* sky-200 */
+  --appbar-h: 64px;        /* used when footer is fixed; here we keep it for sizing */
 }
 
-/* Dark theme — high contrast like original slate look */
+/* Dark theme — high contrast */
 html[data-theme="dark"] {
   --bg: #0b1220;                 /* deep navy */
   --text: #e5e7eb;               /* gray-200 */
@@ -31,7 +32,7 @@ html[data-theme="dark"] {
   --border: #1f2937;             /* gray-800 */
   --card: rgba(17,24,39,0.9);    /* gray-900 glass */
   --card-border: rgba(255,255,255,0.06);
-  --btn-surface: rgba(68,70,77,0.92);  /* MATCH score cards */
+  --btn-surface: rgba(68,70,77,0.92);  /* match score cards */
   --minus-bg: #3b0b0b;           /* dark red tint */
   --minus-border: #7f1d1d;
   --plus-bg: #0b2a3b;            /* dark blue tint */
@@ -49,6 +50,10 @@ body {
   overflow-x: hidden;
 }
 
+/* Flex page wrapper so footer sits at bottom when content is short, but scrolls with page */
+.page { min-height: 100dvh; display: flex; flex-direction: column; }
+.main { flex: 1; }
+
 /* Wolf background (works for both themes) */
 body::before {
   content: "";
@@ -62,7 +67,7 @@ body::before {
 }
 html[data-theme="dark"] body::before {
   background-image:
-    radial-gradient(ellipse at 30% 10%, rgba(0,0,0,0.05), rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.2) 70%),
+    radial-gradient(ellipse at 30% 10%, rgba(0,0,0,0.35), rgba(0,0,0,0.65) 50%, rgba(0,0,0,0.8) 70%),
     url("assets/wolf-bg.jpg");
   filter: saturate(120%) contrast(112%) brightness(0.9);
 }
@@ -103,11 +108,7 @@ html[data-theme="dark"] header h1 { text-shadow: none; }
 
 /* Setup fields: keep inputs a percentage of the card to prevent overflow */
 #setup .field { display: flex; flex-direction: column; align-items: center; }
-#setup .field input {
-  width: 92%;
-  max-width: 92%;
-  margin: 0 auto;
-}
+#setup .field input { width: 92%; max-width: 92%; margin: 0 auto; }
 
 label { display: block; font-weight: 650; margin-bottom: 6px; color: #111827; width: 92%; }
 html[data-theme="dark"] label { color: var(--text); }
@@ -130,7 +131,7 @@ button:hover { box-shadow: 0 2px 10px rgba(37,99,235,0.12); }
 button.primary { background: var(--accent); color: var(--accent-contrast); border-color: transparent; }
 button.secondary { background: #f3f4f6; }
 html[data-theme="dark"] button.secondary {
-  background: var(--btn-surface); /* same as inputs/items */
+  background: var(--btn-surface);
   color: var(--text);
   border-color: #3a3d43;
 }
@@ -140,7 +141,7 @@ button.small { font-size: 14px; padding: 10px 12px; }
 .linklike { background: transparent; border: none; color: var(--accent); padding: 4px 8px; border-radius: 8px; }
 .linklike:hover { text-decoration: underline; box-shadow: none; }
 
-/* Footer toggle: just white text */
+/* Footer toggle: white text */
 .footer-toggle { color: #ffffff !important; }
 
 /* Hole pill */
@@ -193,19 +194,19 @@ html[data-theme="dark"] .score { color: var(--text); }
 html[data-theme="dark"] .btn.minus { color: #fecaca; }
 html[data-theme="dark"] .btn.plus  { color: #67e8f9; }
 
-/* Floating New Game button (bottom-right, outside the card) */
-.fab {
-  position: fixed;
-  right: 16px;
-  bottom: calc(16px + env(safe-area-inset-bottom, 0));
-  z-index: 20;
-  padding: 14px 16px;
-  border-radius: 14px;
-  box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+/* Bottom bar IN NORMAL FLOW (not fixed, not overlaying content) */
+.footbar {
+/*  margin-top: 8px;*/
+/*  padding: 10px 0 calc(10px + env(safe-area-inset-bottom, 0));*/
+/*  background: rgba(255,255,255,0.85);*/
+/*  border-top: 1px solid var(--card-border);*/
+/*  backdrop-filter: blur(8px);*/
+/*  -webkit-backdrop-filter: blur(8px);*/
 }
-.fab:active { transform: translateY(1px); }
-
-/* Footer */
-footer { padding: 18px 0 28px; font-size: 15px; text-shadow: 0 1px 0 rgba(255,255,255,0.6); }
-html[data-theme="dark"] footer { text-shadow: none; }
-.sticky-footer { position: sticky; bottom: env(safe-area-inset-bottom, 0); background: transparent; }
+html[data-theme="dark"] .footbar {
+/*  background: rgba(17,24,39,0.88);*/
+}
+.footbar .container {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 95%;
+}
