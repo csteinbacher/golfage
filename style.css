@@ -38,6 +38,9 @@ html[data-theme="dark"] {
   --plus-bg: #0b2a3b;            /* dark blue tint */
   --plus-border: #0e7490;
 }
+/* Prevent double-tap zoom on iOS and keep 16px sizing */
+html { -webkit-text-size-adjust: 100%; }
+button, input { touch-action: manipulation; }
 
 html, body { height: 100%; }
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -210,3 +213,4 @@ html[data-theme="dark"] .footbar {
   display: flex; align-items: center; justify-content: space-between;
   width: 95%;
 }
+
