@@ -208,3 +208,13 @@ document.addEventListener("DOMContentLoaded", () => {
     applyTheme(current === "dark" ? "light" : "dark");
   });
 });
+
+// Prevent double-tap zoom (fallback for older iOS)
+let lastTouchEnd = 0;
+document.addEventListener('touchend', (e) => {
+  const now = Date.now();
+  if (now - lastTouchEnd <= 300) {
+    e.preventDefault();
+  }
+  lastTouchEnd = now;
+}, { passive: false });
